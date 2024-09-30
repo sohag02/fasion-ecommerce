@@ -1,5 +1,4 @@
 import { HeroSlider } from '@/components/components-hero-slider'
-import { ProductCard } from '@/components/product-card'
 import { PRODUCTS_BY_CATEGORY_QUERY } from '@/sanity/lib/queries'
 import { ProductRow } from '@/components/product-row'
 import { client } from '@/sanity/lib/client'
