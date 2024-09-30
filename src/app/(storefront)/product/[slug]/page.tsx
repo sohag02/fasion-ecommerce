@@ -11,7 +11,7 @@ interface ProductPageProps {
 }
 
 async function getProduct(slug: string): Promise<PRODUCT_QUERYResult | null> {
-  const product: PRODUCT_QUERYResult = await client.fetch(PRODUCT_QUERY, {
+  const product = await client.fetch(PRODUCT_QUERY, {
     slug,
   });
   return product || null;
@@ -29,7 +29,6 @@ export default async function ProductPage({ params }: ProductPageProps) {
       return urlFor(image).url();
     }
   }) || [];
-  console.log(imageUrls);
 
   return (
     <div className="container mx-auto px-4 py-8">

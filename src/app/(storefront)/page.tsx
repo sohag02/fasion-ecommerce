@@ -1,16 +1,19 @@
 import { HeroSlider } from '@/components/components-hero-slider'
 import { ProductCard } from '@/components/product-card'
+import { PRODUCTS_BY_CATEGORY_QUERY } from '@/sanity/lib/queries'
+import { ProductRow } from '@/components/product-row'
+import { client } from '@/sanity/lib/client'
 
-export default function Home() {
+export default async function Home() {
+
+  const menCategoryProducts = await client.fetch(PRODUCTS_BY_CATEGORY_QUERY, {
+    category: "men"
+  })
+
   return (
     <div className="bg-white">
       <HeroSlider />
-      <div className='grid grid-cols-2 gap-4 md:grid-cols-2 lg:grid-cols-3 m-2 px-2 py-4'>
-        <ProductCard image="/placeholder.svg" name="Product Name" price={100} slug="product-slug" />
-        <ProductCard image="/placeholder.svg" name="Product Name" price={100} slug="product-slug" />
-        <ProductCard image="/placeholder.svg" name="Product Name" price={100} slug="product-slug" />
-        <ProductCard image="/placeholder.svg" name="Product Name" price={100} slug="product-slug" />
-      </div>
+      <ProductRow header="Men" products={menCategoryProducts} />
     </div>
   )
 }

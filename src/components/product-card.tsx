@@ -12,7 +12,7 @@ interface ProductCardProps {
 
 export function ProductCard({ image, name, price, slug }: ProductCardProps) {
   return (
-    <Link href={`/${slug}`} className="group block">
+    <Link href={`/product/${slug}`} className="group block">
       <div className="relative overflow-hidden rounded-md border border-gray-200 bg-white transition-all duration-300 hover:shadow-md">
         <div className="relative aspect-[3/4] w-full">
           <Image
@@ -33,7 +33,7 @@ export function ProductCard({ image, name, price, slug }: ProductCardProps) {
         </div>
         <div className="p-3">
           <h3 className="text-sm font-medium text-gray-900 line-clamp-1">{name}</h3>
-          <p className="mt-1 text-sm font-bold text-gray-900">${price.toFixed(2)}</p>
+          <p className="mt-1 text-sm font-bold text-gray-900">₹{price}</p>
         </div>
       </div>
     </Link>
