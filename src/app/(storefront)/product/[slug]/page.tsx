@@ -24,10 +24,8 @@ export default async function ProductPage({ params }: ProductPageProps) {
     notFound();
   }
 
-  const imageUrls = product.gallery?.images!.map((image) => {
-    if (!image._upload) {
-      return urlFor(image).url();
-    }
+  const imageUrls = product.gallery?.images?.map((image) => {
+    return urlFor(image).url();
   }) || [];
 
   return (
