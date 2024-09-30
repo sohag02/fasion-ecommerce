@@ -216,7 +216,7 @@ export type PRODUCTS_QUERYResult = Array<{
   }>;
 }>;
 // Variable: PRODUCT_QUERY
-// Query: *[_type == "product" && slug.current == $slug][0]{  ...,  category->{    title  }}
+// Query: *[_type == "product" && slug.current == $slug][0]{  ...,  category->{    title,    slug  }}
 export type PRODUCT_QUERYResult = {
   _id: string;
   _type: "product";
@@ -257,14 +257,48 @@ export type CATEGORY_QUERYResult = {
   title: string | null;
   slug: Slug | null;
 } | null;
+// Variable: PRODUCTS_BY_CATEGORY_QUERY
+// Query: *[_type == "product" && references(*[_type == "category" && slug.current == 'men']._id)] {  ...,  category[]->{    title,    slug  }}
+export type PRODUCTS_BY_CATEGORY_QUERYResult = Array<{
+  _id: string;
+  _type: "product";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title?: string;
+  slug?: Slug;
+  description?: string;
+  price?: number;
+  isFeatured?: boolean;
+  gallery?: {
+    images?: Array<{
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      };
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      alt?: string;
+      _type: "image";
+      _key: string;
+    }>;
+  };
+  category: Array<{
+    title: string | null;
+    slug: Slug | null;
+  }> | null;
+}>;
 
 // Query TypeMap
 import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
     "*[_type == \"product\"]": PRODUCTS_QUERYResult;
-    "*[_type == \"product\" && slug.current == $slug][0]{\n  ...,\n  category->{\n    title\n  }\n}": PRODUCT_QUERYResult;
+    "*[_type == \"product\" && slug.current == $slug][0]{\n  ...,\n  category->{\n    title,\n    slug\n  }\n}": PRODUCT_QUERYResult;
     "*[_type == \"category\"]{title, slug}": CATEGORIES_QUERYResult;
     "*[_type == \"category\" && slug.current == $slug][0]{title, slug}": CATEGORY_QUERYResult;
+    "*[_type == \"product\" && references(*[_type == \"category\" && slug.current == 'men']._id)] {\n  ...,\n  category[]->{\n    title,\n    slug\n  }\n}": PRODUCTS_BY_CATEGORY_QUERYResult;
   }
 }

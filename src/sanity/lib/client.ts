@@ -13,6 +13,5 @@ export const client = createClient({
 const builder = imageUrlBuilder(client);
 
 export function urlFor(source: any) {
-  console.log(source);
   return builder.image(source);
 }
