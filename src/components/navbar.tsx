@@ -18,7 +18,7 @@ export function Navbar() {
           {/* Logo */}
           <div className="flex-shrink-0">
             <Link href="/" className="text-2xl font-bold text-gray-800">
-              FashionStore
+              {process.env.STORE_NAME}
             </Link>
           </div>
 
