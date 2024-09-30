@@ -34,7 +34,7 @@ const gallery = {
         images: 'images',
         image: 'images.0',
       },
-      prepare(selection) {
+      prepare(selection: { images: any; image: any }) {
         const { images, image } = selection;
   
         return {
