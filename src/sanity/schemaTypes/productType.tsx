@@ -1,4 +1,5 @@
 import { defineField, defineType } from "sanity";
+import gallery from "./gallery";
 
 export const productType = defineType({
   name: "product",
@@ -31,18 +32,23 @@ export const productType = defineType({
       description: "Price of the product",
     }),
     defineField({
-      name: "image",
-      title: "Image",
-      type: "image",
-      options: {
-        hotspot: true,
-      },
+      name: "isFeatured",
+      title: "Is Featured",
+      type: "boolean",
+      description: "Is the product featured?",
+      initialValue: true,
     }),
+    defineField(
+      gallery
+    ),
     defineField({
       name: "category",
       title: "Category",
-      type: "reference",
-      to: [{ type: "category" }],
+      type: "array",
+      of: [{ 
+        type: "reference", 
+        to: { type: "category" } 
+      }],
       description: "Category of the product",
     }),
   ],
